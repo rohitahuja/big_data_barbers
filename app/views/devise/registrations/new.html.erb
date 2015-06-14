@@ -31,6 +31,51 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
+  <%= f.fields_for :professional_account, resource.build_professional_account do |ff| %>
+    <div class="field">
+      <%= ff.label :phone_number %><br />
+      <%= ff.text_field :phone_number, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= ff.label :bio %><br />
+      <%= ff.text_area :bio, autofocus: true %>
+    </div>
+
+    <%= ff.fields_for :workplace, resource.professional_account.build_workplace do |fff| %>
+      <div class="field">
+        <%= fff.label :name %><br />
+        <%= fff.text_field :name, autofocus: true %>
+      </div>
+
+      <div class="field">
+        <%= fff.label :street %><br />
+        <%= fff.text_field :street, autofocus: true %>
+      </div>
+
+      <div class="field">
+        <%= fff.label :city %><br />
+        <%= fff.text_field :city, autofocus: true %>
+      </div>
+
+      <div class="field">
+        <%= fff.label :zip %><br />
+        <%= fff.text_field :zip, autofocus: true %>
+      </div>
+
+      <div class="field">
+        <%= fff.label :state %><br />
+        <%= fff.text_field :state, autofocus: true %>
+      </div>
+
+      <div class="field">
+        <%= fff.label :country %><br />
+        <%= fff.text_field :country, autofocus: true %>
+      </div>
+      
+    <% end %>
+  <% end %>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
