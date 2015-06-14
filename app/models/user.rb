@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
 
   validates :first_name, :last_name, presence: true
 
+  has_one :professional_account
+  accepts_nested_attributes_for :professional_account
+
   def name
   	self.first_name + " " + self.last_name
   end
