@@ -1,84 +1,98 @@
-<h2>Sign up</h2>
+<h2 class="text-center">Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <%= f.fields_for :professional_account, resource.build_professional_account do |ff| %>
-    <div class="field">
-      <%= ff.label :phone_number %><br />
-      <%= ff.text_field :phone_number, autofocus: true %>
+  <fieldset>
+    <legend>User Information</legend>
+    <div class="row">
+      <div class="small-6 columns">
+        <%= f.text_field :first_name, autofocus: true, placeholder: "first name", required: ""%>
+      </div>
+      <div class="small-6 columns">
+        <%= f.text_field :last_name, autofocus: true, placeholder: "last name", required: "" %>
+      </div>
     </div>
 
-    <div class="field">
-      <%= ff.label :bio %><br />
-      <%= ff.text_area :bio, autofocus: true %>
+    <div class="row">
+      <div class="small-12 columns">
+        <%= f.email_field :email, autofocus: true, placeholder: "email", required: "" %>
+      </div>
     </div>
 
-    <%= ff.fields_for :workplace, resource.professional_account.build_workplace do |fff| %>
-      <div class="field">
-        <%= fff.label :name %><br />
-        <%= fff.text_field :name, autofocus: true %>
+    <div class="row">
+      <% min_pass = " (#{@minimum_password_length} characters minimum)" if @minimum_password_length %>
+      <div class="small-12 columns">
+        <%= f.password_field :password, autocomplete: "off", placeholder: "password#{min_pass}", required: "" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="small-12 columns">
+        <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "confirm password", required: "" %>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Profile Information</legend>
+    <%= f.fields_for :professional_account, resource.build_professional_account do |ff| %>
+      <div class="row">
+        <div class="small-12 columns">
+          <%= ff.text_field :phone_number, autofocus: true, placeholder: "phone number", required: "" %>
+        </div>
       </div>
 
-      <div class="field">
-        <%= fff.label :street %><br />
-        <%= fff.text_field :street, autofocus: true %>
+      <div class="row">
+        <div class="small-12 columns">
+          <%= ff.text_area :bio, autofocus: true, placeholder: "bio", rows: "4" %>
+        </div>
       </div>
 
-      <div class="field">
-        <%= fff.label :city %><br />
-        <%= fff.text_field :city, autofocus: true %>
-      </div>
+      <%= ff.fields_for :workplace, resource.professional_account.build_workplace do |fff| %>
+        <div class="row">
+          <div class="small-12 columns">
+            <%= fff.text_field :name, autofocus: true, placeholder: "workplace name", required: "" %>
+          </div>
+        </div>
 
-      <div class="field">
-        <%= fff.label :zip %><br />
-        <%= fff.text_field :zip, autofocus: true %>
-      </div>
+        <div class="row">
+          <div class="small-12 columns">
+            <%= fff.text_field :street, autofocus: true, placeholder: "street", required: "" %>
+          </div>
+        </div>
 
-      <div class="field">
-        <%= fff.label :state %><br />
-        <%= fff.text_field :state, autofocus: true %>
-      </div>
+        <div class="row">
+          <div class="small-7 columns">
+            <%= fff.text_field :city, autofocus: true, placeholder: "city", required: "" %>
+          </div>
+          <div class="small-5 columns">
+            <%= fff.text_field :zip, autofocus: true, placeholder: "zip", required: "" %>
+          </div>
+        </div>
 
-      <div class="field">
-        <%= fff.label :country %><br />
-        <%= fff.text_field :country, autofocus: true %>
-      </div>
-      
+        <div class="row">
+          <div class="small-12 columns">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="small-4 columns">
+            <%= fff.text_field :state, autofocus: true, placeholder: "state", required: "" %>
+          </div>
+          <div class="small-8 columns">
+            <%= fff.text_field :country, autofocus: true, placeholder: "country", required: "" %>
+          </div>
+        </div>
+        
+      <% end %>
     <% end %>
+  </fieldset>
+
+<div class="text-center">
+    <div class="actions">
+      <%= f.submit "Sign up", class: "button round" %>
+    </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+  <%= render "devise/shared/links" %>
+</div>
