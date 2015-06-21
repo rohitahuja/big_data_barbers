@@ -16,6 +16,9 @@
   <body>
   	<div class="row">
   		<div class="small-12 columns">
+        <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, id: "flash_#{name}", class: "alert-box #{flash_message_class(name)} round" %>
+        <% end %>
     		<%= yield %>
     	</div>
     </div>
