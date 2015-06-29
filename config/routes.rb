@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
+
   devise_for :users
 
-  resources :users do
-    resources :professional_accounts, path: 'professional'
+  authenticate :user do
+    resources :professional_accounts, only: [:show], path: 'professional'
+    resources :schedules, only: [:edit, :update, :show]
   end
 
   root 'home_page#index'

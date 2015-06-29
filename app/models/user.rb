@@ -13,4 +13,8 @@ class User < ActiveRecord::Base
   	self.first_name + " " + self.last_name
   end
 
+  def schedule
+    self.professional_account.schedule
+  end
+
 end
