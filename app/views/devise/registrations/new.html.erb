@@ -38,7 +38,7 @@
     <%= f.fields_for :professional_account, resource.build_professional_account do |ff| %>
       <div class="row">
         <div class="small-12 columns">
-          <%= ff.text_field :phone_number, autofocus: true, placeholder: "phone number", required: "" %>
+          <%= ff.telephone_field :phone_number, autofocus: true, placeholder: "phone number", required: "" %>
         </div>
       </div>
 
@@ -86,6 +86,7 @@
         
       <% end %>
     <% end %>
+    <%= f.hidden_field :professional, value: 1 %>
   </fieldset>
 
     <div class="actions text-center">

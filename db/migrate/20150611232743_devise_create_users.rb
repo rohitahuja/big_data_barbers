@@ -33,6 +33,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # Further attributes
       t.string :first_name
       t.string :last_name
+      t.boolean :professional
+      t.boolean :customer
 
       t.timestamps null: false
     end
