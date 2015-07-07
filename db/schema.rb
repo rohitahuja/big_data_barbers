@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20150621055011) do
   enable_extension "plpgsql"
 
   create_table "appointments", force: :cascade do |t|
-    t.integer  "status",                default: 0
+    t.integer  "status",                default: 0 # defaults to pending
     t.datetime "date_and_time"
     t.integer  "length"
     t.string   "customer_name"
@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(version: 20150621055011) do
     t.inet     "last_sign_in_ip"
     t.string   "first_name"
     t.string   "last_name"
+    t.boolean  "professional"
+    t.boolean  "customer"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end

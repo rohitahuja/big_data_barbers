@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'appointments/new'
+
+  post 'appointments/create'
+
   devise_for :users
+
+  resources :appointments, only: [:new, :create, :show]
 
   authenticate :user do
     resources :professional_accounts, only: [:show], path: 'professional'
