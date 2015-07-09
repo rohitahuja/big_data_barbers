@@ -62,5 +62,8 @@ group :development, :test do
 
   # Capybara helper
   gem 'launchy'
+
+  # Use .env file for environment variables
+  gem 'dotenv-rails'
 end
 
