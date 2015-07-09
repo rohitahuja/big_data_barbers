@@ -41,6 +41,15 @@ gem 'foundation-rails'
 # Phone validations
 gem 'phony_rails'
 
+# Use Twilio
+gem 'twilio-ruby'
+
+# Use delayed job for running background jobs
+gem 'delayed_job_active_record'
+
+# Need daemons to start delayed_job
+gem 'daemons'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
