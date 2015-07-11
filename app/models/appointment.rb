@@ -5,7 +5,7 @@ class Appointment < ActiveRecord::Base
 
   @@REMINDER_TIME = 30.minutes # minutes before appointment
 
-	# Notify our appointment attendee X minutes before the appointment time
+	# notify our appointment attendee X minutes before the appointment time
   def reminder
     @twilio_number = ENV['TWILIO_NUMBER']
     @client = Twilio::REST::Client.new ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN']
