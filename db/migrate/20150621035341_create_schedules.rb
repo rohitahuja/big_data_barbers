@@ -1,7 +1,7 @@
 class CreateSchedules < ActiveRecord::Migration
   def change
     create_table :schedules do |t|
-    	t.belongs_to :professional_account
+    	t.belongs_to :professional_account, index:true
 
       t.timestamps null: false
     end

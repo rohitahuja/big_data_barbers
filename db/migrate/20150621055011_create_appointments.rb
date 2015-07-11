@@ -6,7 +6,7 @@ class CreateAppointments < ActiveRecord::Migration
     	t.integer :length
     	t.string :customer_name
     	t.string :customer_phone_number
-    	t.belongs_to :schedule
+    	t.belongs_to :schedule, index:true
 
       t.timestamps null: false
     end

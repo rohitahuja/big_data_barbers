@@ -50,6 +50,10 @@ gem 'delayed_job_active_record'
 # Need daemons to start delayed_job
 gem 'daemons'
 
+# Image uploading
+gem "refile", require: "refile/rails"
+gem "refile-mini_magick"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

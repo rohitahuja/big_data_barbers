@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150707030042) do
+ActiveRecord::Schema.define(version: 20150711225722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20150707030042) do
     t.datetime "updated_at",                        null: false
   end
 
+  add_index "appointments", ["schedule_id"], name: "index_appointments_on_schedule_id", using: :btree
+
   create_table "availabilities", force: :cascade do |t|
     t.integer  "day_of_week"
     t.time     "start_time"
@@ -35,6 +37,8 @@ ActiveRecord::Schema.define(version: 20150707030042) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "availabilities", ["schedule_id"], name: "index_availabilities_on_schedule_id", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -52,12 +56,22 @@ ActiveRecord::Schema.define(version: 20150707030042) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
+  create_table "posts", force: :cascade do |t|
+    t.string   "image_id"
+    t.integer  "professional_account_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "posts", ["professional_account_id"], name: "index_posts_on_professional_account_id", using: :btree
+
   create_table "professional_accounts", force: :cascade do |t|
     t.string   "phone_number"
     t.text     "bio"
+    t.string   "profile_image_id"
     t.integer  "user_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   add_index "professional_accounts", ["user_id"], name: "index_professional_accounts_on_user_id", using: :btree
@@ -67,6 +81,8 @@ ActiveRecord::Schema.define(version: 20150707030042) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
+
+  add_index "schedules", ["professional_account_id"], name: "index_schedules_on_professional_account_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -101,5 +117,7 @@ ActiveRecord::Schema.define(version: 20150707030042) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
+
+  add_index "workplaces", ["professional_account_id"], name: "index_workplaces_on_professional_account_id", using: :btree
 
 end

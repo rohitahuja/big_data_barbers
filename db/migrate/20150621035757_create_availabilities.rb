@@ -4,7 +4,7 @@ class CreateAvailabilities < ActiveRecord::Migration
     	t.integer :day_of_week
     	t.time :start_time
     	t.time :end_time
-   		t.belongs_to :schedule
+   		t.belongs_to :schedule, index:true
 
       t.timestamps null: false
     end

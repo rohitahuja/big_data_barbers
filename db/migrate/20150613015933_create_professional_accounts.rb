@@ -3,6 +3,7 @@ class CreateProfessionalAccounts < ActiveRecord::Migration
     create_table :professional_accounts do |t|
       t.string :phone_number
       t.text :bio
+      t.string :profile_image_id
       t.belongs_to :user, index: true
 
       t.timestamps null: false

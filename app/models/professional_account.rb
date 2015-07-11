@@ -9,6 +9,8 @@ class ProfessionalAccount < ActiveRecord::Base
 
 	validates :phone_number, presence: true
 
+	attachment :profile_image
+
 	# Create a schedule object for a professional account once it has been created
 	after_create do |professional_account|
 		professional_account.create_schedule
