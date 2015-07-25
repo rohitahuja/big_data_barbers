@@ -1,10 +1,19 @@
 Rails.application.routes.draw do
 
-  namespace :api do
-    scope :v1 do
+  get 'appointments/new'
 
-    end
+  post 'appointments/create'
+
+  devise_for :users
+
+  resources :appointments, only: [:new, :create, :show]
+
+  authenticate :user do
+    resources :professional_accounts, only: [:show], path: 'professional'
+    resources :schedules, only: [:edit, :update, :show]
   end
+
+  root 'home_page#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
