@@ -5,4 +5,5 @@ addons:
   code_climate:
     repo_token: e73f5088383854bff1f189d4215d0a8a71fda8caf8a69fdbfdaa2614f54a5bc8
 env:
-	- CODECLIMATE_REPO_TOKEN=e73f5088383854bff1f189d4215d0a8a71fda8caf8a69fdbfdaa2614f54a5bc8
+	global:
+		- CODECLIMATE_REPO_TOKEN=e73f5088383854bff1f189d4215d0a8a71fda8caf8a69fdbfdaa2614f54a5bc8
