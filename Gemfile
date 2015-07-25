@@ -15,20 +15,8 @@ gem 'active_model_serializers'
 # Rack Cors
 gem 'rack-cors'
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
 # Authentication
 gem 'devise'
-
-# # Stylesheets
-# gem 'foundation-rails'
 
 # Phone validations
 gem 'phony_rails'
@@ -52,6 +40,9 @@ gem 'thin'
 group :development, :test do
   # Generate fake data
   gem 'faker'
+
+  # Factory builder for resources
+  gem 'factory_girl_rails'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
