@@ -3,4 +3,4 @@ rvm:
   - 2.1.2
 addons:
   code_climate:
-    secure: "Qp70FVkMYQ9Jei5/OiHsdj5t0hoaSYgRmL0OK/VSCBF34iL0lNKJdfERFKtyJlp6Ee4bz+T/YIIteFhZHRijTjjEoBI0D8JzxCPjmwr/VhAD8FCCAiTTl5754ZOYqohFFy/JlokSjdTCNZHyv76FAPREfQdMT7HVvAL1YLHUFwg="
+    repo_token: e73f5088383854bff1f189d4215d0a8a71fda8caf8a69fdbfdaa2614f54a5bc8 bundle exec rake
