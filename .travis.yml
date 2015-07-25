@@ -1,9 +1,9 @@
 language: ruby
 rvm:
-  - 2.1.2
+- 2.1.2
 addons:
   code_climate:
     repo_token: e73f5088383854bff1f189d4215d0a8a71fda8caf8a69fdbfdaa2614f54a5bc8
 env:
-	global:
-		- CODECLIMATE_REPO_TOKEN=e73f5088383854bff1f189d4215d0a8a71fda8caf8a69fdbfdaa2614f54a5bc8
+  matrix:
+    secure: Q3Ib7r/9Bq8nVSdk/uyciZxiKYMYBjtwH5R++9gRxWA2uqLcsSIHlXDDjyzyI45QoCVmPeB5iwfPBXhzqLpmHLEyunOHfTUyqQsBpt03TpsvDTdvCjOqPmDczirbbwFLFvDN/PX4xcfiJTgI2+/0gRKxufwE5XhyWYafeBhpCbc=
