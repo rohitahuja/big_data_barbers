@@ -1,3 +1,6 @@
 language: ruby
 rvm:
   - 2.1.2
+addons:
+  code_climate:
+    secure: "Qp70FVkMYQ9Jei5/OiHsdj5t0hoaSYgRmL0OK/VSCBF34iL0lNKJdfERFKtyJlp6Ee4bz+T/YIIteFhZHRijTjjEoBI0D8JzxCPjmwr/VhAD8FCCAiTTl5754ZOYqohFFy/JlokSjdTCNZHyv76FAPREfQdMT7HVvAL1YLHUFwg="

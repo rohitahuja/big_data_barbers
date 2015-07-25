@@ -37,6 +37,10 @@ gem 'refile-mini_magick'
 # Alternative web server
 gem 'thin'
 
+group :test do
+  gem "codeclimate-test-reporter", require: nil
+end
+
 group :development, :test do
   # Generate fake data
   gem 'faker'
