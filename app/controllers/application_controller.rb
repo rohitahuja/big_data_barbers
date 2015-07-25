@@ -2,7 +2,6 @@ class ApplicationController < ActionController::API
   include AbstractController::Translation
   include ActionController::Serialization
 
-  # before_filter :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user_from_token!
 
   respond_to :json
@@ -46,14 +45,5 @@ class ApplicationController < ActionController::API
     # User's token is either invalid or not in the right format
     render json: {error: t('unauthorized')}, status: 401  # Authentication timeout
   end
-
- #  def configure_permitted_parameters
- #  	devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(
- #  		:first_name, :last_name, :email, :password, :password_confirmation, :professional, :customer,
- #  		professional_account_attributes: [:phone_number, :bio, 
- #      workplace_attributes: [:name, :street, :city, :zip, :state, :country] ]) }
- #  	devise_parameter_sanitizer.for(:account_update) { |u| u.permit(
- #  		:first_name, :last_name, :email, :password, :password_confirmation) }
-	# end
 
 end
