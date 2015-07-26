@@ -32,6 +32,9 @@ RSpec.configure do |config|
   # FactoryGirl configuration
   config.include FactoryGirl::Syntax::Methods
 
+  # Helpers
+  config.include RequestsHelper::JsonHelper, type: :request
+
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.

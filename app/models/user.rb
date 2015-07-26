@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :recoverable, :validatable
-
-  after_create :update_access_token!
+  # Include default devise modules.
+  #:confirmable,
+  devise :database_authenticatable, :registerable,
+          :recoverable, :rememberable, :trackable, :validatable,
+          :omniauthable
+  include DeviseTokenAuth::Concerns::User
 
   # validates :first_name, :last_name, :email, presence: true
 
@@ -19,10 +20,5 @@ class User < ActiveRecord::Base
   end
 
   private
-
-    def update_access_token!
-      self.access_token = "#{ self.id }:#{ Devise.friendly_token }"
-      save
-    end
 
 end

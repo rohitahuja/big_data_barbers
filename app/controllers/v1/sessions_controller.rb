@@ -20,7 +20,7 @@ module V1
 
       def invalid_login_attempt
         warden.custom_failure!
-        render json: {error: t('sessions_controller.invalid_login_attempt')}, status: :unprocessable_entity
+        render json: { success: false, message: 'User cannot be authenticated' }, status: :unprocessable_entity
       end
 
   end

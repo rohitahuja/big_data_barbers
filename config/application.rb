@@ -9,12 +9,13 @@ Bundler.require(*Rails.groups)
 module BigDataBarbers
   class Application < Rails::Application
     # CORS settings
-    config.middleware.insert_before 'Rack::Runtime', 'Rack::Cors' do
+    config.middleware.use Rack::Cors do
       allow do
         origins '*'
         resource '*',
-                 headers: :any,
-                 methods: [:get, :put, :post, :patch, :delete, :options]
+          :headers => :any,
+          :expose  => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+          :methods => [:get, :post, :options, :delete, :put]
       end
     end
 

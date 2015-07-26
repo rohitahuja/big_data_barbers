@@ -16,7 +16,9 @@ gem 'active_model_serializers'
 gem 'rack-cors'
 
 # Authentication
+gem 'omniauth'
 gem 'devise'
+gem 'devise_token_auth', '0.1.32.beta8'
 
 # Phone validations
 gem 'phony_rails'
