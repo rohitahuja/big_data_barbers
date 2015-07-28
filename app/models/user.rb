@@ -1,6 +1,14 @@
 class User < ActiveRecord::Base
   # Include default devise modules.
   #:confirmable,
+
+  ## TODO
+  # Add validation that user must have either professional account or customer account
+  # Add uniqueness validations
+  # Add presence validations
+  # Add length validations
+  
+
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable,
           :omniauthable

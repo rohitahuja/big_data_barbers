@@ -116,7 +116,8 @@ ActiveRecord::Schema.define(version: 20150711225722) do
 
   create_table "workplaces", force: :cascade do |t|
     t.string   "name"
-    t.string   "street"
+    t.string   "address_1"
+    t.string   "address_2"
     t.string   "city"
     t.string   "zip"
     t.string   "state"

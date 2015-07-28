@@ -7,7 +7,7 @@ class ProfessionalAccount < ActiveRecord::Base
 	has_many :availabilities, through: :schedule
 	accepts_nested_attributes_for :workplace
 
-	validates :phone_number, presence: true
+	validates :phone_number, presence: true #needs to be unique
 
 	attachment :profile_image
 
