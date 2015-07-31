@@ -1,11 +1,11 @@
 class ProfessionalAccountPolicy < ApplicationPolicy
 
   def update?
-    user == record.user
+    user.id == record.user_id
   end
 
-  def destroy?
-  	user == record.user
-  end
+  # def destroy?
+  # 	user.id == record.user_id
+  # end
   
 end

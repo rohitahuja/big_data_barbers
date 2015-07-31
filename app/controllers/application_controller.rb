@@ -43,9 +43,9 @@ class ApplicationController < ActionController::API
 
 	# GET /api/v1/{plural_resource_name}
 	def index
-    authorize resource_name.to_sym
 	  plural_resource_name = "@#{resource_name.pluralize}"
-	  resources = resource_class_name.where(query_params)
+	  resources = policy_scope(resource_class_name) ||
+                resource_class_name.where(query_params)
 	                            # .page(page_params[:page])
 	                            # .per(page_params[:page_size])
 

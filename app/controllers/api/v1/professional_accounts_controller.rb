@@ -2,16 +2,13 @@
 module Api
 	module V1
 	  class ProfessionalAccountsController < ApplicationController
-	    before_action :authenticate_user!, only: [:create, :destroy, :update]
+	    before_action :authenticate_user!, only: [:update] #:create, :destroy, 
 
 	    private
 
-	      def professional_account_params
+				def professional_account_params
 	        params.require(:professional_account).permit(:bio, :phone_number)
 	      end
-
-	      # query params used for searching
-
 	  end
 	end
 end
