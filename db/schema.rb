@@ -70,11 +70,13 @@ ActiveRecord::Schema.define(version: 20150711225722) do
     t.text     "bio"
     t.string   "profile_image_id"
     t.integer  "user_id"
+    t.integer  "workplace_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
 
   add_index "professional_accounts", ["user_id"], name: "index_professional_accounts_on_user_id", using: :btree
+  add_index "professional_accounts", ["workplace_id"], name: "index_professional_accounts_on_workplace_id", using: :btree
 
   create_table "schedules", force: :cascade do |t|
     t.integer  "professional_account_id"
@@ -122,11 +124,8 @@ ActiveRecord::Schema.define(version: 20150711225722) do
     t.string   "zip"
     t.string   "state"
     t.string   "country"
-    t.integer  "professional_account_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
-
-  add_index "workplaces", ["professional_account_id"], name: "index_workplaces_on_professional_account_id", using: :btree
 
 end

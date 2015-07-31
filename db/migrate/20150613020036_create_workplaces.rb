@@ -8,7 +8,6 @@ class CreateWorkplaces < ActiveRecord::Migration
       t.string :zip # zip/postal code
       t.string :state # state/province/region
       t.string :country
-      t.belongs_to :professional_account, index:true
 
       t.timestamps null: false
     end

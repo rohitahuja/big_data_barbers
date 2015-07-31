@@ -18,15 +18,17 @@ describe 'ProfessionalAccount' do
 	context 'PUT /api/v1/professional_account/:id' do
 		it 'updates professional account' do
 			user = login_user
-			professional_account = FactoryGirl.create(:professional_account, user_id: user.id)
+			workplace = FactoryGirl.create(:workplace)
+			professional_account = FactoryGirl.create(:professional_account, user_id: user.id, workplace_id: workplace.id)
+
 
 			phone_number = Faker::PhoneNumber.phone_number
 			params = { professional_account: { phone_number: phone_number } }
 			put "/api/v1/professional_accounts/#{professional_account.id}", params, request_header
 			#  needs to be authed
 			expect(response).to be_success
-
 			expect(json['professional_account']['phone_number']).to eq(phone_number)
+			expect(json['professional_account']['workplace']['name']).to eq(workplace.name)
 		end
 
 		it 'does not update professional account without request_header' do

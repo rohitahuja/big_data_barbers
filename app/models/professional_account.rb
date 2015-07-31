@@ -1,11 +1,11 @@
 class ProfessionalAccount < ActiveRecord::Base
 
 	belongs_to :user
-	has_one :workplace
+	belongs_to :workplace
 	has_one :schedule
 	has_many :appointments, through: :schedule
 	has_many :availabilities, through: :schedule
-	accepts_nested_attributes_for :workplace
+	accepts_nested_attributes_for :workplace #, reject if: workplace_exists?
 
 	validates :phone_number, presence: true #needs to be unique
 
