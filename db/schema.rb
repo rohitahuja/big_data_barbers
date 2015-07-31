@@ -104,8 +104,8 @@ ActiveRecord::Schema.define(version: 20150711225722) do
     t.text     "tokens"
     t.string   "first_name"
     t.string   "last_name"
-    t.boolean  "professional"
-    t.boolean  "customer"
+    t.boolean  "is_professional"
+    t.boolean  "is_customer"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
   end

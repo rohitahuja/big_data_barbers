@@ -1,5 +1,4 @@
 require 'rails_helper'
-include RequestsHelper::SessionsHelper
 
 describe 'Session' do
 	context 'POST /api/v1/auth/sign_in' do
@@ -32,7 +31,6 @@ describe 'Session' do
 	  	user = FactoryGirl.create(:user)
 
 	  	delete '/api/v1/auth/sign_out'
-
 	  	expect(response).to_not be_success
 	  	expect(json['errors']).to_not be_empty
 	  end

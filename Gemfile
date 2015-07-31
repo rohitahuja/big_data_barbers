@@ -20,6 +20,9 @@ gem 'omniauth'
 gem 'devise'
 gem 'devise_token_auth', '0.1.32.beta8'
 
+# Authorization
+gem 'pundit'
+
 # Phone validations
 gem 'phony_rails'
 
@@ -63,7 +66,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
 
   # Best debugging tool
-  gem 'pry'
+  # gem 'pry'
+  gem 'pry-byebug'
 
   # Use .env file for environment variables
   gem 'dotenv-rails'

@@ -14,6 +14,9 @@ class ProfessionalAccount < ActiveRecord::Base
 	# Create a schedule object for a professional account once it has been created
 	after_create do |professional_account|
 		professional_account.create_schedule
+		user = professional_account.user
+		user.is_professional = true
+		user.save
 	end
 
 end

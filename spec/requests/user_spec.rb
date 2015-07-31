@@ -1,5 +1,4 @@
 require 'rails_helper'
-include RequestsHelper::SessionsHelper
 
 describe 'User' do
 	context 'POST /api/v1/auth' do
