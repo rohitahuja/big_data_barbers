@@ -7,7 +7,7 @@ module Api
 	    private
 
 	      def appointment_params
-					params.require(:appointment).permit(:customer_name, :customer_phone_number, :date_and_time, :length)
+					params.require(:appointment).permit(:status, :customer_name, :customer_phone_number, :date_and_time, :length, :schedule_id)
 				end
 	  end
 	end

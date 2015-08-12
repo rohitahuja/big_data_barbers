@@ -19,5 +19,18 @@ module RequestsHelper
 				'access-token' => header['access-token'], 
 				'client' => header['client'] }
 		end
+
+		# def create_params(object)
+		# 	params = {}
+		# 	object.attributes.each do |attr_name, attr_value|
+		# 		if attr_value.is_a?(ActiveRecord::Base)
+		# 			params[attr_name + '_attributes'] => create_params(attr_value)
+		# 		end
+		# 		params[attr_name]
+		# 	end
+		# 	{ 
+		# 		object.class.name.downcase => 
+		# 	}
+		# end
 	end
 end

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'ProfessionalAccount' do
-	context 'GET /api/v1/professional_account/:id' do
+	context 'GET /api/v1/professional_accounts/:id' do
 		it 'gets the professional account under the authenticated user' do
 			user = login_user
 			professional_account = FactoryGirl.create(:professional_account, user_id: user.id)
@@ -10,12 +10,11 @@ describe 'ProfessionalAccount' do
 			#  needs to be authed
 
 			expect(response).to be_success
-
-			expect(user.professional_account.id).to eq(json['professional_account']['id']) 
+			expect(user.professional_account.id).to eq(json['id']) 
 		end
 	end
 
-	context 'PUT /api/v1/professional_account/:id' do
+	context 'PUT /api/v1/professional_accounts/:id' do
 		it 'updates professional account' do
 			user = login_user
 			workplace = FactoryGirl.create(:workplace)
@@ -26,8 +25,8 @@ describe 'ProfessionalAccount' do
 			put "/api/v1/professional_accounts/#{professional_account.id}", params, request_header
 			#  needs to be authed
 			expect(response).to be_success
-			expect(json['professional_account']['phone_number']).to eq(phone_number)
-			expect(json['professional_account']['workplace']['name']).to eq(workplace.name)
+			expect(json['phone_number']).to eq(phone_number)
+			expect(json['workplace']['name']).to eq(workplace.name)
 		end
 
 		it 'does not update professional account without request_header' do

@@ -27,7 +27,7 @@ class ApplicationController < ActionController::API
 
 	  if get_resource.save
 	    # render :show, status: :created
-      render json: get_resource, status: :created
+      render json: get_resource, serializer: serializer_name, status: :created
 	  else
 	    render json: get_resource.errors, status: :unprocessable_entity
 	  end
@@ -50,14 +50,14 @@ class ApplicationController < ActionController::API
 	                            # .per(page_params[:page_size])
 
 	  instance_variable_set(plural_resource_name, resources)
-	  respond_with instance_variable_get(plural_resource_name)
+	  respond_with instance_variable_get(plural_resource_name), each_serializer: serializer_name
 	end
 
 	# GET /api/v1/{plural_resource_name}/1
 	def show
     authorize get_resource
 
-	  respond_with get_resource
+	  respond_with get_resource, serializer: serializer_name
 	end
 
 	# PATCH/PUT /api/v1/{plural_resource_name}/1
@@ -66,7 +66,7 @@ class ApplicationController < ActionController::API
 
 	  if get_resource.update(resource_params)
       # render :show
-	    render json: get_resource
+	    render json: get_resource, serializer: serializer_name
 	  else
 	    render json: get_resource.errors, status: :unprocessable_entity
 	  end
@@ -97,6 +97,10 @@ class ApplicationController < ActionController::API
     # @return [Class]
     def resource_class_name
       @resource_class_name ||= resource_name.classify.constantize
+    end
+
+    def serializer_name
+      (resource_name.classify + 'Serializer').constantize
     end
 
     # The singular name for the resource class based on the controller

@@ -36,8 +36,8 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 
 # Image uploading
-gem 'refile', require: 'refile/rails'
-gem 'refile-mini_magick'
+gem 'fog', require: 'fog/aws'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 
 # Alternative web server
 gem 'thin'

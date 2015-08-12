@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20150711225722) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "posts", force: :cascade do |t|
-    t.string   "image_id"
+    t.string   "image"
     t.integer  "professional_account_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
@@ -68,11 +68,11 @@ ActiveRecord::Schema.define(version: 20150711225722) do
   create_table "professional_accounts", force: :cascade do |t|
     t.string   "phone_number"
     t.text     "bio"
-    t.string   "profile_image_id"
+    t.string   "profile_image"
     t.integer  "user_id"
     t.integer  "workplace_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "professional_accounts", ["user_id"], name: "index_professional_accounts_on_user_id", using: :btree

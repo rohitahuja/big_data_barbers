@@ -1,39 +1,54 @@
 require 'rails_helper'
 
 describe 'Schedule' do
-	context 'GET /api/v1/auth/professional_accounts/:professional_account_id/schedule' do
-		it 'signs in successfully' do
-	    user = login_user
+	context 'GET /api/v1/schedule/:id' do
+		it 'gets the schedule' do
+			user = login_user
+			professional_account = FactoryGirl.create(:professional_account, user_id: user.id)
+			availabilities = [
+				FactoryGirl.create(:availability, schedule_id: professional_account.schedule.id),
+				FactoryGirl.create(:availability, schedule_id: professional_account.schedule.id)
+			]
 
-	    expect(response).to be_success
-	    expect(json['data']['email']).to eq(user.email) # check to make sure the right amount of messages are returned
-	  end
+			availability_ids = availabilities.map { |a| a.id }
 
-	  it 'does not sign in with wrong credentials' do
-	  	# will not create a user
-	  	params = { email: Faker::Internet.email, password: Faker::Internet.password }
+			get "/api/v1/schedules/#{professional_account.schedule.id}", nil, request_header
 
-	  	post '/api/v1/auth/sign_in', params
-	  	expect(response).to_not be_success
-	  	expect(json['errors']).to_not be_empty
-	  end
+			expect(response).to be_success
+
+			expect(json['id']).to eq(professional_account.schedule.id)
+			expect(json['availabilities'].uniq.length).to eq(2)
+
+			expect(availability_ids).to include(json['availabilities'][0]['id'].to_i)
+			expect(availability_ids).to include(json['availabilities'][1]['id'].to_i)	
+		end
 	end
   
-  context 'DELETE /api/v1/auth/sign_out' do
-  	it 'signs out successfully' do
-	  	user = login_user
+  context 'PUT /api/v1/schedule/:id' do
+  	it 'updates the schedule' do
+  		user = login_user
+			professional_account = FactoryGirl.create(:professional_account, user_id: user.id)
+			availabilities = [
+				FactoryGirl.create(:availability, day_of_week: 1, schedule_id: professional_account.schedule.id),
+				FactoryGirl.create(:availability, day_of_week: 1, schedule_id: professional_account.schedule.id)
+			]
 
-	  	delete '/api/v1/auth/sign_out', nil, request_header
-	  	expect(response).to be_success
-	  end
+			params = {
+				schedule: {
+					availabilities_attributes: [
+						{ id: availabilities[0].id, day_of_week: 3, start_time: availabilities[0].start_time, end_time: availabilities[0].end_time, schedule_id: professional_account.schedule.id },
+						{ id: availabilities[1].id, day_of_week: 3, start_time: availabilities[1].start_time, end_time: availabilities[1].end_time, schedule_id: professional_account.schedule.id }
+					]
+				}
+			}
 
-	  it 'does not sign out when not initially signed in' do
-	  	user = FactoryGirl.create(:user)
+			put "/api/v1/schedules/#{professional_account.schedule.id}", params, request_header
 
-	  	delete '/api/v1/auth/sign_out'
-	  	expect(response).to_not be_success
-	  	expect(json['errors']).to_not be_empty
-	  end
+			expect(response).to be_success
+
+			expect(json['availabilities'][0]['day_of_week']).to eq(3)
+			expect(json['availabilities'][1]['day_of_week']).to eq(3)
+  	end
   end
   
 end

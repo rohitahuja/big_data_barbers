@@ -7,7 +7,7 @@ class AppointmentPolicy < ApplicationPolicy
   end
 
 	def create?
-		user.professional_account.schedule.id == record.schedule_id
+		user.professional_account != nil
 	end
 
 	def show?
