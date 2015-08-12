@@ -1,5 +1,5 @@
 class Schedule < ActiveRecord::Base
-	belongs_to :professional_account
+	belongs_to :professional
 	has_many :appointments
 	has_many :availabilities
 

@@ -58,35 +58,14 @@ ActiveRecord::Schema.define(version: 20150711225722) do
 
   create_table "posts", force: :cascade do |t|
     t.string   "image"
-    t.integer  "professional_account_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "professional_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
-  add_index "posts", ["professional_account_id"], name: "index_posts_on_professional_account_id", using: :btree
+  add_index "posts", ["professional_id"], name: "index_posts_on_professional_id", using: :btree
 
-  create_table "professional_accounts", force: :cascade do |t|
-    t.string   "phone_number"
-    t.text     "bio"
-    t.string   "profile_image"
-    t.integer  "user_id"
-    t.integer  "workplace_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  add_index "professional_accounts", ["user_id"], name: "index_professional_accounts_on_user_id", using: :btree
-  add_index "professional_accounts", ["workplace_id"], name: "index_professional_accounts_on_workplace_id", using: :btree
-
-  create_table "schedules", force: :cascade do |t|
-    t.integer  "professional_account_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-  end
-
-  add_index "schedules", ["professional_account_id"], name: "index_schedules_on_professional_account_id", using: :btree
-
-  create_table "users", force: :cascade do |t|
+  create_table "professionals", force: :cascade do |t|
     t.string   "provider",               default: "email", null: false
     t.string   "uid",                    default: "",      null: false
     t.string   "email",                  default: "",      null: false
@@ -106,15 +85,26 @@ ActiveRecord::Schema.define(version: 20150711225722) do
     t.text     "tokens"
     t.string   "first_name"
     t.string   "last_name"
-    t.boolean  "is_professional"
-    t.boolean  "is_customer"
+    t.string   "phone_number"
+    t.text     "bio"
+    t.string   "profile_image"
+    t.integer  "workplace_id"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
+  add_index "professionals", ["email"], name: "index_professionals_on_email", unique: true, using: :btree
+  add_index "professionals", ["reset_password_token"], name: "index_professionals_on_reset_password_token", unique: true, using: :btree
+  add_index "professionals", ["uid", "provider"], name: "index_professionals_on_uid_and_provider", unique: true, using: :btree
+  add_index "professionals", ["workplace_id"], name: "index_professionals_on_workplace_id", using: :btree
+
+  create_table "schedules", force: :cascade do |t|
+    t.integer  "professional_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "schedules", ["professional_id"], name: "index_schedules_on_professional_id", using: :btree
 
   create_table "workplaces", force: :cascade do |t|
     t.string   "name"

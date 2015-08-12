@@ -1,10 +1,10 @@
-class ProfessionalAccountSerializer < ActiveModel::Serializer
+class ProfessionalSerializer < ActiveModel::Serializer
   attributes :id, :name, :phone_number, :bio
   has_one :workplace, serializer: WorkplaceSerializer
   has_one :schedule, serializer: ScheduleSerializer
 
   def name
-  	object.user.name
+  	object.name
   end
 
   # def workplace
@@ -12,7 +12,7 @@ class ProfessionalAccountSerializer < ActiveModel::Serializer
   # end
 
   # def schedule_id
-  # 	Schedule.find_by_professional_account_id(object.id).id
+  # 	Schedule.find_by_professional_id(object.id).id
   # end
 
 

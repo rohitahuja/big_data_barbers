@@ -2,7 +2,7 @@
 module Api
 	module V1
 	  class PostsController < ApplicationController
-	    before_action :authenticate_user!, only: [:create, :destroy]
+	    before_action :authenticate_professional!, only: [:create, :destroy]
 
 	    private
 
@@ -11,7 +11,7 @@ module Api
 	      	return @params if @params
 
 			    # process through strong params
-			    @params = params.require(:post).permit(:image, :professional_account_id)
+			    @params = params.require(:post).permit(:image, :professional_id)
 			    @params[:image] = decode_image_data(@params[:image])
 
 			    # return @params

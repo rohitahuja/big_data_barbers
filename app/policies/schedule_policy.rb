@@ -1,11 +1,13 @@
 class SchedulePolicy < ApplicationPolicy
 
   def update?
-    user.professional_account.id == record.professional_account_id
+  	if user.professional?
+      user.id == record.professional_id 
+    end
   end
 
   # def destroy?
-  # 	user.professional_account.id == record.professional_account_id
+  # 	user.id == record.professional_account_id
   # end
   
 end

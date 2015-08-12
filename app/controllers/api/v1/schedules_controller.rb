@@ -2,7 +2,7 @@
 module Api
 	module V1
 	  class SchedulesController < ApplicationController
-	    before_action :authenticate_user!, only: [:update]
+	    before_action :authenticate_professional!, only: [:update]
 
 	    private
 

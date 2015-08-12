@@ -70,7 +70,11 @@ class ApplicationController < ActionController::API
 	  else
 	    render json: get_resource.errors, status: :unprocessable_entity
 	  end
-	end 
+	end
+
+  def current_user
+    current_professional # || current_customer || current_shop
+  end
 
   private
     # Returns the resource from the created instance variable
@@ -132,9 +136,11 @@ class ApplicationController < ActionController::API
 
 	  def configure_permitted_parameters
 	  	devise_parameter_sanitizer.for(:sign_up).concat(
-	  		[:first_name, :last_name, :email, :password, :password_confirmation, :professional, :customer,
-	  		professional_account_attributes: [:phone_number, :bio, 
-	        workplace_attributes: [:name, :address_1, :address_2, :city, :zip, :state, :country] ]])
+	  		[:first_name, :last_name, :email, :password, :password_confirmation, :phone_number, :bio, 
+	        workplace_attributes: [:name, :address_1, :address_2, :city, :zip, :state, :country]])
+      devise_parameter_sanitizer.for(:account_update).concat(
+        [:first_name, :last_name, :email, :password, :password_confirmation, :phone_number, :bio, 
+          workplace_attributes: [:name, :address_1, :address_2, :city, :zip, :state, :country]])
 	  	# devise_parameter_sanitizer.for(:account_update) { |u| u.permit(
 	  	# 	:first_name, :last_name, :email, :password, :password_confirmation) }
 		end

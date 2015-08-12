@@ -2,24 +2,32 @@ class AppointmentPolicy < ApplicationPolicy
 
 	class Scope < Scope
     def resolve
-      scope.where(schedule_id: user.professional_account.schedule.id)
+      if user.professional?
+        scope.where(schedule_id: user.schedule.id)
+      end
     end
   end
 
 	def create?
-		user.professional_account != nil
+		user != nil
 	end
 
 	def show?
-		user.professional_account.schedule.id == record.schedule_id
+    if user.professional?
+      user.schedule.id == record.schedule_id  
+    end
 	end
 
   def update?
-    user.professional_account.schedule.id == record.schedule_id
+    if user.professional?
+      user.schedule.id == record.schedule_id  
+    end
   end
 
   def destroy?
-  	user.professional_account.schedule.id == record.schedule_id
+    if user.professional?
+      user.schedule.id == record.schedule_id  
+    end
   end
   
 end

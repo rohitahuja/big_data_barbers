@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class Professional < ActiveRecord::Base
   # Include default devise modules.
   #:confirmable,
 
@@ -15,18 +15,27 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   # validates :first_name, :last_name, :email, presence: true
+  belongs_to :workplace
+  has_one :schedule
+  has_many :appointments, through: :schedule
+  has_many :availabilities, through: :schedule
+  has_many :posts
+  accepts_nested_attributes_for :workplace #, reject if: workplace_exists?
 
-  has_one :professional_account
-  accepts_nested_attributes_for :professional_account
+  validates :phone_number, presence: true #needs to be unique
+
+  mount_uploader :profile_image, ImageUploader
+
+  after_create do |professional|
+    professional.create_schedule
+  end
 
   def name
   	self.first_name + " " + self.last_name
   end
 
-  def schedule
-    self.professional_account.schedule
+  def professional?
+    true
   end
-
-  private
 
 end

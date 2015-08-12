@@ -2,7 +2,7 @@
 module Api
 	module V1
 	  class AppointmentsController < ApplicationController
-	    before_action :authenticate_user!, only: [:index, :show, :create, :update]
+	    before_action :authenticate_professional!, only: [:index, :show, :create, :update]
 
 	    private
 

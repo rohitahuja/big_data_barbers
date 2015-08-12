@@ -6,10 +6,10 @@ module RequestsHelper
 	end
 
 	module SessionsHelper
-		def login_user
-			user = FactoryGirl.create(:user)
+		def login_user(type)
+			user = FactoryGirl.create(type.to_sym)
 			params = { email: user.email, password: user.password }
-			post '/api/v1/auth/sign_in', params
+			post '/api/v1/auth_' + type + '/sign_in', params
 			user
 		end
 

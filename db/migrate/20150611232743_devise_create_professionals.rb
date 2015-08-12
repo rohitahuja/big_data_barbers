@@ -1,6 +1,6 @@
-class DeviseCreateUsers < ActiveRecord::Migration
+class DeviseCreateProfessionals < ActiveRecord::Migration
   def change
-    create_table(:users) do |t|
+    create_table(:professionals) do |t|
       ## Required
       t.string :provider, null: false, default: "email"
       t.string :uid, null: false, default: ""
@@ -37,19 +37,21 @@ class DeviseCreateUsers < ActiveRecord::Migration
       ## Tokens
       t.text :tokens
 
-      # Further attributes
+      # More attributes
       t.string :first_name
       t.string :last_name
-      t.boolean :is_professional
-      t.boolean :is_customer
+      t.string :phone_number
+      t.text :bio
+      t.string :profile_image
+      t.belongs_to :workplace, index: true
 
       t.timestamps null: false
     end
 
-    add_index :users, :email,                unique: true
-    add_index :users, [:uid, :provider], unique: true
-    add_index :users, :reset_password_token, unique: true
-    # add_index :users, :confirmation_token,   unique: true
-    # add_index :users, :unlock_token,         unique: true
+    add_index :professionals, :email,                unique: true
+    add_index :professionals, [:uid, :provider], unique: true
+    add_index :professionals, :reset_password_token, unique: true
+    # add_index :professionals, :confirmation_token,   unique: true
+    # add_index :professionals, :unlock_token,         unique: true
   end
 end

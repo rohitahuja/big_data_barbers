@@ -1,17 +1,15 @@
 require 'rails_helper'
 
 describe 'Appointment' do
-	context 'GET /api/v1/professional_accounts/:professional_account_id/appointments' do
-		it 'gets only the appointments under the user' do
-			user_1 = login_user
-			professional_account_1 = FactoryGirl.create(:professional_account, user_id: user_1.id)
-			appointment_1 = FactoryGirl.create(:appointment, schedule_id: professional_account_1.schedule.id)
+	context 'GET /api/v1/professionals/:professional_id/appointments' do
+		it 'gets only the appointments under the professional' do
+			professional_1 = login_user('professional')
+			appointment_1 = FactoryGirl.create(:appointment, schedule_id: professional_1.schedule.id)
 		
-			user_2 = FactoryGirl.create(:user)
-			professional_account_2 = FactoryGirl.create(:professional_account, user_id: user_2.id)
-			appointment_2 = FactoryGirl.create(:appointment, schedule_id: professional_account_2.schedule.id)
+			professional_2 = FactoryGirl.create(:professional)
+			appointment_2 = FactoryGirl.create(:appointment, schedule_id: professional_2.schedule.id)
 
-			get "/api/v1/professional_accounts/#{professional_account_1.id}/appointments", nil, request_header
+			get "/api/v1/professionals/#{professional_1.id}/appointments", nil, request_header
 
 			expect(response).to be_success
 			expect(json['appointments'].length).to eq(1)
@@ -19,10 +17,9 @@ describe 'Appointment' do
 		end
 	end
 
-	context 'POST /api/v1/professional_accounts/:professional_account_id/appointments' do
-		it 'creates an appointment under a user' do
-			user = login_user
-			professional_account = FactoryGirl.create(:professional_account, user_id: user.id)
+	context 'POST /api/v1/professionals/:professional_id/appointments' do
+		it 'creates an appointment under a professional' do
+			professional = login_user('professional')
 			appointment = FactoryGirl.build(:appointment)
 
 			params = {
@@ -32,22 +29,21 @@ describe 'Appointment' do
 					length: appointment.length,
 					customer_name: appointment.customer_name,
 					customer_phone_number: appointment.customer_phone_number,
-					schedule_id: professional_account.schedule.id
+					schedule_id: professional.schedule.id
 				}
 			}
 
-			post "/api/v1/professional_accounts/#{professional_account.id}/appointments", params, request_header
+			post "/api/v1/professionals/#{professional.id}/appointments", params, request_header
 
 			expect(response).to be_success
-			expect(json['customer_name']).to eq(professional_account.schedule.appointments[0].customer_name)
+			expect(json['customer_name']).to eq(professional.schedule.appointments[0].customer_name)
 		end	
 	end
 
 	context 'GET /api/v1/appointments/:id' do
 		it 'gets the appointment under the user' do
-			user = login_user
-			professional_account = FactoryGirl.create(:professional_account, user_id: user.id)
-			appointment = FactoryGirl.create(:appointment, schedule_id: professional_account.schedule.id)
+			professional = login_user('professional')
+			appointment = FactoryGirl.create(:appointment, schedule_id: professional.schedule.id)
 
 			get "/api/v1/appointments/#{appointment.id}", nil, request_header
 
@@ -56,12 +52,10 @@ describe 'Appointment' do
 		end
 
 		it 'does not get the appointment under another user' do
-			user_without_appointment = login_user
-			professional_account_without_appointment = FactoryGirl.create(:professional_account, user_id: user_without_appointment.id)
+			professional_without_appointment = login_user('professional')
 
-			user_with_appointment = FactoryGirl.create(:user)
-			professional_account_with_appointment = FactoryGirl.create(:professional_account, user_id: user_with_appointment.id)
-			appointment = FactoryGirl.create(:appointment, schedule_id: professional_account_with_appointment.schedule.id)
+			professional_with_appointment = FactoryGirl.create(:professional)
+			appointment = FactoryGirl.create(:appointment, schedule_id: professional_with_appointment.schedule.id)
 
 			get "/api/v1/appointments/#{appointment.id}", nil, request_header
 
@@ -71,9 +65,8 @@ describe 'Appointment' do
 
 	context 'PUT /api/v1/appointments/:id' do
 		it 'updates the appointment' do
-			user = login_user
-			professional_account = FactoryGirl.create(:professional_account, user_id: user.id)
-			appointment = FactoryGirl.create(:appointment, schedule_id: professional_account.schedule.id)
+			professional = login_user('professional')
+			appointment = FactoryGirl.create(:appointment, schedule_id: professional.schedule.id)
 
 			params = {
 				appointment: {
