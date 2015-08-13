@@ -6,6 +6,7 @@ describe 'Post' do
 	context 'GET /api/v1/professionals/:professional_id/posts' do
 		it 'gets only the posts under the user' do
 			professional_1 = login_user('professional')
+
 			post_1 = FactoryGirl.create(:post, professional_id: professional_1.id)
 		
 			professional_2 = FactoryGirl.create(:professional)

@@ -5,8 +5,8 @@ describe 'Schedule' do
 		it 'gets the schedule' do
 			professional = login_user('professional')
 			availabilities = [
-				FactoryGirl.create(:availability, schedule_id: professional.schedule.id),
-				FactoryGirl.create(:availability, schedule_id: professional.schedule.id)
+				FactoryGirl.create(:availability, day_of_week: 1, schedule_id: professional.schedule.id),
+				FactoryGirl.create(:availability, day_of_week: 2, schedule_id: professional.schedule.id)
 			]
 
 			availability_ids = availabilities.map { |a| a.id }
