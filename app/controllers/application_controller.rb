@@ -132,6 +132,19 @@ class ApplicationController < ActionController::API
       render json: { errors: [ 'Your are not authorized to perform this action.' ] }, status: :unauthorized
     end
 
+    def decode_image_data image_data
+      # decode the base64
+      data = StringIO.new(Base64.decode64(image_data))
+
+      # assign some attributes for carrierwave processing
+      data.class.class_eval { attr_accessor :original_filename, :content_type }
+      data.original_filename = "upload.png"
+      data.content_type = "image/png"
+
+      # return decoded data
+      data
+    end
+
 	protected
 
 	  def configure_permitted_parameters
