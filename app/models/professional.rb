@@ -13,7 +13,7 @@ class Professional < ActiveRecord::Base
   has_many :posts, inverse_of: :professional
   accepts_nested_attributes_for :workplace #, reject if: workplace_exists?
 
-  phony_normalize :phone_number
+  phony_normalize :phone_number, default_country_code: 'US'
 
   validates :first_name, :last_name, :email, :workplace, presence: true
   validates :phone_number, presence: true, uniqueness: true, phony_plausible: true #needs to be unique

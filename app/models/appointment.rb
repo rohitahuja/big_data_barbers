@@ -1,7 +1,7 @@
 class Appointment < ActiveRecord::Base
 	belongs_to :schedule, inverse_of: :appointments
 
-  phony_normalize :customer_phone_number
+  phony_normalize :customer_phone_number, default_country_code: 'US'
 
   validates :date_and_time, :customer_name, :schedule, presence: true
   validates :customer_phone_number, presence: true, phony_plausible: true

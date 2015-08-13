@@ -69,7 +69,7 @@ describe 'Professional' do
 
 			created_professional = Professional.find_by_email(professional.email)
 
-			expect(created_professional.phone_number).to eq(professional.phone_number) 
+			expect(created_professional.phone_number).to eq('+' + Phony.normalize(professional.phone_number, cc: '1')) 
 			expect(created_professional.workplace.name).to eq(workplace.name)
 		end
 	end
@@ -89,12 +89,12 @@ describe 'Professional' do
 		it 'updates professional account' do
 			professional = login_user('professional')
 
-			phone_number = Faker::PhoneNumber.phone_number
+			phone_number = Faker::PhoneNumber.area_code + Faker::PhoneNumber.exchange_code + Faker::PhoneNumber.subscriber_number
 			params = { professional: { phone_number: phone_number } }
 			put "/api/v1/professionals/#{professional.id}", params, request_header
 			#  needs to be authed
 			expect(response).to be_success
-			expect(json['phone_number']).to eq(phone_number)
+			expect(json['phone_number']).to eq('+' + Phony.normalize(phone_number, cc: '1'))
 		end
 
 		it 'does not update professional account without request_header' do

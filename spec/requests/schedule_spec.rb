@@ -28,14 +28,14 @@ describe 'Schedule' do
   		professional = login_user('professional')
 			availabilities = [
 				FactoryGirl.create(:availability, day_of_week: 1, schedule_id: professional.schedule.id),
-				FactoryGirl.create(:availability, day_of_week: 1, schedule_id: professional.schedule.id)
+				FactoryGirl.create(:availability, day_of_week: 2, schedule_id: professional.schedule.id)
 			]
 
 			params = {
 				schedule: {
 					availabilities_attributes: [
-						{ id: availabilities[0].id, day_of_week: 3, start_time: availabilities[0].start_time, end_time: availabilities[0].end_time, schedule_id: professional.schedule.id },
-						{ id: availabilities[1].id, day_of_week: 3, start_time: availabilities[1].start_time, end_time: availabilities[1].end_time, schedule_id: professional.schedule.id }
+						{ id: availabilities[0].id, day_of_week: 3 },
+						{ id: availabilities[1].id, day_of_week: 4 }
 					]
 				}
 			}
@@ -44,8 +44,10 @@ describe 'Schedule' do
 
 			expect(response).to be_success
 
-			expect(json['availabilities'][0]['day_of_week']).to eq(3)
-			expect(json['availabilities'][1]['day_of_week']).to eq(3)
+			days_of_week = [3, 4]
+
+			expect(days_of_week).to include(json['availabilities'][0]['day_of_week'])
+			expect(days_of_week).to include(json['availabilities'][1]['day_of_week'])
   	end
   end
   

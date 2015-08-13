@@ -1,5 +1,5 @@
 FactoryGirl.define do
 	factory :post do
-		image 'hello world'
+		image { Faker::Avatar.image }
 	end
 end
