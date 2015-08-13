@@ -4,7 +4,8 @@ FactoryGirl.define do
 		last_name { Faker::Name.last_name }
 		email { Faker::Internet.email }
 		password { Faker::Internet.password(8) }
-		phone_number { Faker::PhoneNumber.phone_number }
+		phone_number { Faker::PhoneNumber.cell_phone }
 		bio { Faker::Lorem.paragraph(10) }
+		workplace_id { FactoryGirl.create(:workplace).id }
 	end
 end

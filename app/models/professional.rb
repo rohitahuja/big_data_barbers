@@ -1,28 +1,23 @@
 class Professional < ActiveRecord::Base
   # Include default devise modules.
   #:confirmable,
-
-  ## TODO
-  # Add validation that user must have either professional account or customer account
-  # Add uniqueness validations
-  # Add presence validations
-  # Add length validations
-  
-
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable,
           :omniauthable
   include DeviseTokenAuth::Concerns::User
 
-  # validates :first_name, :last_name, :email, presence: true
-  belongs_to :workplace
-  has_one :schedule
+  belongs_to :workplace, inverse_of: :professionals
+  has_one :schedule, inverse_of: :professional
   has_many :appointments, through: :schedule
   has_many :availabilities, through: :schedule
-  has_many :posts
+  has_many :posts, inverse_of: :professional
   accepts_nested_attributes_for :workplace #, reject if: workplace_exists?
 
-  validates :phone_number, presence: true #needs to be unique
+  phony_normalize :phone_number
+
+  validates :first_name, :last_name, :email, :workplace, presence: true
+  validates :phone_number, presence: true, uniqueness: true, phony_plausible: true #needs to be unique
+  # validates :bio, length: { maximum: 500 } # if long bios are a problem
 
   mount_uploader :profile_image, ImageUploader
 

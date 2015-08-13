@@ -1,6 +1,6 @@
 class Workplace < ActiveRecord::Base
-	validates :name, :address_1, :address_2, :city, :state, :country, presence: true
-	# validates :zip, presence: true, numericality: { only_integer: true }
+	validates :name, :address_1, :address_2, :city, :state, :country, :zip, presence: true
 	# add uniqueness validations for this
-	has_many :professionals
+	# add validations that ensure address is valid
+	has_many :professionals, inverse_of: :workplace
 end

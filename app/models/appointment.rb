@@ -1,5 +1,13 @@
 class Appointment < ActiveRecord::Base
-	belongs_to :schedule
+	belongs_to :schedule, inverse_of: :appointments
+
+  phony_normalize :customer_phone_number
+
+  validates :date_and_time, :customer_name, :schedule, presence: true
+  validates :customer_phone_number, presence: true, phony_plausible: true
+  validates :status, presence: true, inclusion: { in: [-1, 0, 1] }
+  validates :length, presence: true, numericality: { greater_than: 0 }
+  validate :date_and_time_is_after_now
 
 	after_create :reminder
 
@@ -21,6 +29,10 @@ class Appointment < ActiveRecord::Base
 
   def when_to_run
     date_and_time - @@REMINDER_TIME
+  end
+
+  def date_and_time_is_after_now
+    errors.add(:date_and_time, "Date and time of appointment needs to be after now") if date_and_time < DateTime.now
   end
 
   handle_asynchronously :reminder, run_at: Proc.new { |i| i.when_to_run }
