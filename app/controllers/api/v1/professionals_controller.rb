@@ -2,7 +2,15 @@
 module Api
 	module V1
 	  class ProfessionalsController < ApplicationController
-	    before_action :authenticate_professional!, only: [:update] #:create, :destroy, 
+	    before_action :authenticate_professional!, only: [:update] #:create, :destroy
+
+	    def show
+	    	super
+	    end
+
+	    def update
+	    	super
+	    end
 
 	    private
 

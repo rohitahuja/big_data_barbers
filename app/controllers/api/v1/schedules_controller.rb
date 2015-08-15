@@ -4,6 +4,14 @@ module Api
 	  class SchedulesController < ApplicationController
 	    before_action :authenticate_professional!, only: [:update]
 
+	    def show
+	    	super
+	    end
+
+	    def update
+	    	super
+	    end
+
 	    private
 
 	      def schedule_params

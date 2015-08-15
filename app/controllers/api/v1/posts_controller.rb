@@ -4,6 +4,18 @@ module Api
 	  class PostsController < ApplicationController
 	    before_action :authenticate_professional!, only: [:create, :destroy]
 
+	    def index
+	    	super
+	    end
+
+	    def show
+	    	super
+	    end
+
+	    def create
+	    	super
+	    end
+
 	    private
 
 	      def post_params

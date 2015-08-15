@@ -4,6 +4,22 @@ module Api
 	  class AppointmentsController < ApplicationController
 	    before_action :authenticate_professional!, only: [:index, :show, :create, :update]
 
+	    def index
+	    	super
+	    end
+
+	    def show
+	    	super
+	    end
+
+	    def create
+	    	super
+	    end
+
+	    def update
+	    	super
+	    end
+
 	    private
 
 	      def appointment_params
