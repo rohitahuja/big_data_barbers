@@ -11,6 +11,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # API tools
 gem 'rails-api'
 gem 'active_model_serializers'
+gem 'apipie-rails', github: 'Apipie/apipie-rails', ref: '928bd858fd14ec67eeb9483ba0d43b3be8339608'
 
 # Rack Cors
 gem 'rack-cors'

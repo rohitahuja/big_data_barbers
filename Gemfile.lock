@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/Apipie/apipie-rails.git
+  revision: 928bd858fd14ec67eeb9483ba0d43b3be8339608
+  ref: 928bd858fd14ec67eeb9483ba0d43b3be8339608
+  specs:
+    apipie-rails (0.3.4)
+      json
+
+GIT
   remote: git://github.com/carrierwaveuploader/carrierwave.git
   revision: 37cf31d34fa411db20e99cc654195020b06202c3
   specs:
@@ -330,6 +338,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  apipie-rails!
   byebug
   carrierwave!
   codeclimate-test-reporter
