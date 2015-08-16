@@ -43,6 +43,9 @@ gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 # Alternative web server
 gem 'thin'
 
+# Production gems
+gem 'rails_12factor', group: :production
+
 group :test do
   gem "codeclimate-test-reporter", require: nil
 end
