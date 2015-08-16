@@ -5,6 +5,8 @@ Apipie.configure do |config|
   # where is your API defined?
   config.api_controllers_matcher = "#{Rails.root}/app/controllers/api/v1/*.rb"
 
+  config.validate = false
+
   # config.authenticate = Proc.new do
   #    authenticate_or_request_with_http_basic do |username, password|
   #      username == "test" && password == "supersecretpassword"
