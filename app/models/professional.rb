@@ -15,7 +15,7 @@ class Professional < ActiveRecord::Base
 
   phony_normalize :phone_number, default_country_code: 'US'
 
-  validates :first_name, :last_name, :email, :workplace, presence: true
+  validates :first_name, :last_name, :email, presence: true # :workplace
   validates :phone_number, presence: true, uniqueness: true, phony_plausible: true #needs to be unique
   # validates :bio, length: { maximum: 500 } # if long bios are a problem
 
