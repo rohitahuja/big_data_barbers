@@ -11,8 +11,7 @@ class ApplicationController < ActionController::API
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  protect_from_forgery
-  skip_before_action :verify_authenticity_token, if: :json_request?
+  protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
   # serialization_scope :view_context
   before_action :set_resource, only: [:destroy, :show, :update], unless: :devise_controller?
 
@@ -144,10 +143,6 @@ class ApplicationController < ActionController::API
 
       # return decoded data
       data
-    end
-
-    def json_request?
-      request.format.json?
     end
 
 	protected
