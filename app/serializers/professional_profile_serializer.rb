@@ -1,4 +1,4 @@
-class ProfessionalSerializer < ActiveModel::Serializer
+class ProfessionalProfileSerializer < ActiveModel::Serializer
   attributes :id, :name, :phone_number, :bio
   has_one :workplace, serializer: WorkplaceSerializer
   has_one :schedule, serializer: ScheduleSerializer

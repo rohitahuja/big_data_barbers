@@ -5,7 +5,7 @@ class Professional < ActiveRecord::Base
           :recoverable, :rememberable, :trackable, :validatable,
           :omniauthable
   include DeviseTokenAuth::Concerns::User
-  include Permissions
+  include User::Permissions
 
   belongs_to :shop, inverse_of: :professionals
   has_one :schedule, inverse_of: :professional
