@@ -3,7 +3,9 @@ class PostPolicy < ApplicationPolicy
 	class Scope < Scope
     def resolve
       if user.professional?
-        scope.where(professional_id: user.id)
+        scope.order(:created_at).where(professional_profile_id: user.profile.id)
+      # elsif user.shop?
+      #   scope.order(:created_at).joins(professional_profiles: [{ professionals: :shops }]).where(shops: { id: user.id })
       end
     end
   end

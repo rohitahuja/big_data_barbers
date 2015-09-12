@@ -9,24 +9,34 @@ class AppointmentPolicy < ApplicationPolicy
   end
 
 	def create?
-		user != nil
+		if user.professional?
+      true
+    elsif user.shop?
+      record.professional.shop_id == user.id
+    end
 	end
 
 	def show?
     if user.professional?
       user.schedule.id == record.schedule_id  
+    elsif user.shop?
+      record.professional.shop_id == user.id
     end
 	end
 
   def update?
     if user.professional?
       user.schedule.id == record.schedule_id  
+    elsif user.shop?
+      record.professional.shop_id == user.id
     end
   end
 
   def destroy?
     if user.professional?
       user.schedule.id == record.schedule_id  
+    elsif user.shop?
+      record.professional.shop_id == user.id
     end
   end
   
