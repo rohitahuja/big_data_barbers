@@ -12,6 +12,7 @@ class Professional < ActiveRecord::Base
   has_one :professional_profile, inverse_of: :professional
   has_many :appointments, through: :schedule
   has_many :availabilities, through: :schedule
+  has_many :service_details, inverse_of: :professional
   accepts_nested_attributes_for :professional_profile #, reject if: workplace_exists?
 
   phony_normalize :phone_number, default_country_code: 'US'

@@ -8,6 +8,7 @@ class Shop < ActiveRecord::Base
 
   has_one :shop_profile, inverse_of: :shop
   has_many :professionals, inverse_of: :shop
+  has_many :service_details, inverse_of: :shop
 
   validates :shop_profile, presence: true
 
