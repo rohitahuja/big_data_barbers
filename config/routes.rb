@@ -44,7 +44,7 @@ Rails.application.routes.draw do
       ###
       # resources :appointments, only: [:show, :create, :update]
       # resources :schedules, only: [:update]
-      resources :posts, only: [:index, :show, :create] # add destroy later
+      resources :posts, only: [:show, :create] # add destroy later
     end
   end
   
