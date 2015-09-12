@@ -6,12 +6,11 @@ class Professional < ActiveRecord::Base
           :omniauthable
   include DeviseTokenAuth::Concerns::User
 
-  belongs_to :workplace, inverse_of: :professionals
+  belongs_to :shop, inverse_of: :professionals
   has_one :schedule, inverse_of: :professional
   has_one :professional_profile, inverse_of: :professional
   has_many :appointments, through: :schedule
   has_many :availabilities, through: :schedule
-  accepts_nested_attributes_for :workplace #, reject if: workplace_exists?
   accepts_nested_attributes_for :professional_profile #, reject if: workplace_exists?
 
   phony_normalize :phone_number, default_country_code: 'US'

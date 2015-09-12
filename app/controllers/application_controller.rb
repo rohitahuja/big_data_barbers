@@ -4,9 +4,7 @@ class ApplicationController < ActionController::API
   # include ActionController::Parameters 
   include ActionController::RequestForgeryProtection
   include ActionController::ImplicitRender
-
   include DeviseTokenAuth::Concerns::SetUserByToken
-
   include Pundit
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
@@ -73,7 +71,7 @@ class ApplicationController < ActionController::API
 	end
 
   def current_user
-    current_professional # || current_customer || current_shop
+    current_professional || current_shop # || current_customer
   end
 
   private
