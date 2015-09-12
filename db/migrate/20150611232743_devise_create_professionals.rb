@@ -34,16 +34,11 @@ class DeviseCreateProfessionals < ActiveRecord::Migration
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
+      # Associations
+      t.belongs_to :shop, index: true
+
       ## Tokens
       t.text :tokens
-
-      # More attributes
-      t.string :first_name
-      t.string :last_name
-      t.string :phone_number
-      t.text :bio
-      t.string :profile_image
-      t.belongs_to :workplace, index: true
 
       t.timestamps null: false
     end
