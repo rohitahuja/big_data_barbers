@@ -5,6 +5,7 @@ class Professional < ActiveRecord::Base
           :recoverable, :rememberable, :trackable, :validatable,
           :omniauthable
   include DeviseTokenAuth::Concerns::User
+  include Permissions
 
   belongs_to :shop, inverse_of: :professionals
   has_one :schedule, inverse_of: :professional
@@ -27,6 +28,10 @@ class Professional < ActiveRecord::Base
 
   def name
   	first_name + " " + last_name
+  end
+
+  def profile
+    professional_profile
   end
 
   def professional?
