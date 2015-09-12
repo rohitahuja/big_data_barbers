@@ -1,54 +1,58 @@
-require 'rails_helper'
+##########################################
+# UNNECESSARY UNTIL BOOKING FEATURE IS OUT
+##########################################
 
-describe 'Schedule' do
-	context 'GET /api/v1/schedule/:id' do
-		it 'gets the schedule' do
-			professional = login_user('professional')
-			availabilities = [
-				FactoryGirl.create(:availability, day_of_week: 1, schedule_id: professional.schedule.id),
-				FactoryGirl.create(:availability, day_of_week: 2, schedule_id: professional.schedule.id)
-			]
+# require 'rails_helper'
 
-			availability_ids = availabilities.map { |a| a.id }
+# describe 'Schedule' do
+# 	context 'GET /api/v1/schedule/:id' do
+# 		it 'gets the schedule' do
+# 			professional = login_user('professional')
+# 			availabilities = [
+# 				FactoryGirl.create(:availability, day_of_week: 1, schedule_id: professional.schedule.id),
+# 				FactoryGirl.create(:availability, day_of_week: 2, schedule_id: professional.schedule.id)
+# 			]
 
-			get "/api/v1/schedules/#{professional.schedule.id}", nil, request_header
+# 			availability_ids = availabilities.map { |a| a.id }
 
-			expect(response).to be_success
+# 			get "/api/v1/schedules/#{professional.schedule.id}", nil, request_header
 
-			expect(json['id']).to eq(professional.schedule.id)
-			expect(json['availabilities'].uniq.length).to eq(2)
+# 			expect(response).to be_success
 
-			expect(availability_ids).to include(json['availabilities'][0]['id'].to_i)
-			expect(availability_ids).to include(json['availabilities'][1]['id'].to_i)	
-		end
-	end
+# 			expect(json['id']).to eq(professional.schedule.id)
+# 			expect(json['availabilities'].uniq.length).to eq(2)
+
+# 			expect(availability_ids).to include(json['availabilities'][0]['id'].to_i)
+# 			expect(availability_ids).to include(json['availabilities'][1]['id'].to_i)	
+# 		end
+# 	end
   
-  context 'PUT /api/v1/schedule/:id' do
-  	it 'updates the schedule' do
-  		professional = login_user('professional')
-			availabilities = [
-				FactoryGirl.create(:availability, day_of_week: 1, schedule_id: professional.schedule.id),
-				FactoryGirl.create(:availability, day_of_week: 2, schedule_id: professional.schedule.id)
-			]
+#   context 'PUT /api/v1/schedule/:id' do
+#   	it 'updates the schedule' do
+#   		professional = login_user('professional')
+# 			availabilities = [
+# 				FactoryGirl.create(:availability, day_of_week: 1, schedule_id: professional.schedule.id),
+# 				FactoryGirl.create(:availability, day_of_week: 2, schedule_id: professional.schedule.id)
+# 			]
 
-			params = {
-				schedule: {
-					availabilities_attributes: [
-						{ id: availabilities[0].id, day_of_week: 3 },
-						{ id: availabilities[1].id, day_of_week: 4 }
-					]
-				}
-			}
+# 			params = {
+# 				schedule: {
+# 					availabilities_attributes: [
+# 						{ id: availabilities[0].id, day_of_week: 3 },
+# 						{ id: availabilities[1].id, day_of_week: 4 }
+# 					]
+# 				}
+# 			}
 
-			put "/api/v1/schedules/#{professional.schedule.id}", params, request_header
+# 			put "/api/v1/schedules/#{professional.schedule.id}", params, request_header
 
-			expect(response).to be_success
+# 			expect(response).to be_success
 
-			days_of_week = [3, 4]
+# 			days_of_week = [3, 4]
 
-			expect(days_of_week).to include(json['availabilities'][0]['day_of_week'])
-			expect(days_of_week).to include(json['availabilities'][1]['day_of_week'])
-  	end
-  end
+# 			expect(days_of_week).to include(json['availabilities'][0]['day_of_week'])
+# 			expect(days_of_week).to include(json['availabilities'][1]['day_of_week'])
+#   	end
+#   end
   
-end
+# end
