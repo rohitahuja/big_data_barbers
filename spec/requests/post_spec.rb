@@ -3,22 +3,25 @@ require 'rails_helper'
 describe 'Post' do
   include CarrierWave::Test::Matchers
 
-	context 'GET /api/v1/professionals/:professional_id/posts' do
-		it 'gets only the posts under the user' do
-			professional_1 = login_user('professional')
+  ##########################################
+  # USE INDEX TESTS WHEN NECESSARY
+  ##########################################
+	# context 'GET /api/v1/professionals/:professional_id/posts' do
+	# 	it 'gets only the posts under the user' do
+	# 		professional_1 = login_user('professional')
 
-			post_1 = FactoryGirl.create(:post, professional_id: professional_1.id)
+	# 		post_1 = FactoryGirl.create(:post, professional_id: professional_1.id)
 		
-			professional_2 = FactoryGirl.create(:professional)
-			post_2 = FactoryGirl.create(:post, professional_id: professional_2.id)
+	# 		professional_2 = FactoryGirl.create(:professional)
+	# 		post_2 = FactoryGirl.create(:post, professional_id: professional_2.id)
 
-			get "/api/v1/professionals/#{professional_1.id}/posts", nil, request_header
+	# 		get "/api/v1/professionals/#{professional_1.id}/posts", nil, request_header
 
-			expect(response).to be_success
-			expect(json['posts'].length).to eq(1)
-			expect(json['posts'][0]['id']).to eq(post_1.id)
-		end
-	end
+	# 		expect(response).to be_success
+	# 		expect(json['posts'].length).to eq(1)
+	# 		expect(json['posts'][0]['id']).to eq(post_1.id)
+	# 	end
+	# end
   
   context 'POST /api/v1/professionals/:professional_id/posts' do
   	it 'creates a post under a professional' do
